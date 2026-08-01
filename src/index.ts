@@ -1,8 +1,10 @@
 import express from 'express'
 
-const app = express()
+import type { Express } from 'express'
+
+const app: Express = express()
 const PORT = 8000
 
-app.listen(PORT, () => {
+app.listen(PORT, (): void => {
   console.log(`Listening on port:${PORT}`)
 })
