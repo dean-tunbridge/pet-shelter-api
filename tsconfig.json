@@ -2,6 +2,6 @@
   "extends": "@tsconfig/node24/tsconfig.json",
   "compilerOptions": {
     "rootDir": "src",
-    "outdir": "dist"
+    "outDir": "dist"
   }
 }
