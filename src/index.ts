@@ -5,6 +5,11 @@ import type { Express } from 'express'
 const app: Express = express()
 const PORT = 8000
 
+//GET
+app.get('/', (req, res) => {
+  res.json({})
+})
+
 app.listen(PORT, (): void => {
   console.log(`Listening on port:${PORT}`)
 })
