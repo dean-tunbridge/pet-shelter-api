@@ -3,7 +3,7 @@ import type { Express, Request, Response } from 'express'
 import cors from 'cors'
 
 import { pets } from './data/pets'
-import type { Pets } from './data/pets'
+import type { Pet } from './data/pets'
 
 const app: Express = express()
 const PORT = 8000
@@ -11,14 +11,14 @@ const PORT = 8000
 app.use(cors())
 
 // GET //
-app.get('/', (req: Request, res: Response<Pets[]>): void => {
+app.get('/', (req: Request, res: Response<Pet[]>): void => {
   res.json(pets)
 })
 
 // GET BY ID //
-app.get('/:id', (req: Request, res: Response): void => {
+app.get('/:id', (req: Request<{ id: string }>, res: Response): void => {
   const { id } = req.params
-  const pet = pets.find((pet) => pet.id.toString() === id)
+  const pet = pets.find((pet: Pet): boolean => pet.id.toString() === id)
   res.json(pet)
 })
 

@@ -1,4 +1,4 @@
-export type Pets = {
+export type Pet = {
   id: number
   name: string
   species: string
@@ -15,7 +15,7 @@ export type Pets = {
   photo: string
 }
 
-export const pets: Pets[] = [
+export const pets: Pet[] = [
   {
     id: 1,
     name: 'Bella',
