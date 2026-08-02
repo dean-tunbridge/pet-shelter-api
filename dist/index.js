@@ -19,6 +19,18 @@ app.get('/:id', (req, res) => {
     const pet = pets_1.pets.find((pet) => pet.id.toString() === id);
     pet ? res.json(pet) : res.status(404).json({ message: 'Invalid ID' });
 });
+// GET BY SPECIES //
+app.get('/', (req, res) => {
+    const { species } = req.query;
+    let filterPets = pets_1.pets;
+    if (species) {
+        filterPets = filterPets.filter((pet) => pet.species.toLowerCase() === pet.species.toLowerCase());
+        res.json(filterPets);
+    }
+    else {
+        res.status(404).json({ message: 'Invalid ID' });
+    }
+});
 // ERROR //
 app.use((req, res) => {
     res.status(404).json({ message: 'No route found' });
