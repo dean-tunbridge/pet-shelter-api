@@ -14,6 +14,10 @@ app.get('/', (req: Request, res: Response): void => {
   res.json(pets)
 })
 
+app.use((req: Request, res: Response): void => {
+  res.status(404).json({ message: 'No route found' })
+})
+
 app.listen(PORT, (): void => {
   console.log(`Listening on port:${PORT}`)
 })
