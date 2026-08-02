@@ -42,7 +42,7 @@ app.get(
     req: Request<{}, unknown, {}, PetQueryParams>,
     res: Response<Pet[] | { message: string }>,
   ): void => {
-    const { species } = req.query
+    const { species, adopted } = req.query
     let filterPets: Pet[] = pets
 
     if (species) {
@@ -50,31 +50,15 @@ app.get(
         (pet: Pet): boolean =>
           pet.species.toLowerCase() === pet.species.toLowerCase(),
       )
-      res.json(filterPets)
-    } else {
-      res.status(404).json({ message: 'Invalid ID' })
     }
-  },
-)
-
-// GET BY ADOPTED STATUS //
-app.get(
-  '/',
-  (
-    req: Request<{}, unknown, {}, PetQueryParams>,
-    res: Response<Pet[] | { message: string }>,
-  ): void => {
-    const { adopted } = req.query
-    let isAdopted: Pet[] = pets
 
     if (adopted) {
-      isAdopted = isAdopted.filter(
-        (pet: Pet): boolean => pet.adopted === pet.adopted,
+      filterPets = filterPets.filter(
+        (pet: Pet): boolean => pet.adopted === JSON.parse(adopted),
       )
-      res.json(isAdopted)
-    } else {
-      res.status(404).json({ message: 'Invalid Response' })
     }
+
+    res.json(filterPets)
   },
 )
 
