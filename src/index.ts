@@ -1,4 +1,4 @@
-import express from 'express'
+import express, { request } from 'express'
 import type { Express, Request, Response } from 'express'
 import cors from 'cors'
 
@@ -10,11 +10,19 @@ const PORT = 8000
 
 app.use(cors())
 
-//GET
+// GET //
 app.get('/', (req: Request, res: Response<Pets[]>): void => {
   res.json(pets)
 })
 
+// GET BY ID //
+app.get('/:id', (req: Request, res: Response): void => {
+  const { id } = req.params
+  const pet = pets.find((pet) => pet.id.toString() === id)
+  res.json(pet)
+})
+
+// ERROR //
 app.use((req: Request, res: Response<{ message: string }>): void => {
   res.status(404).json({ message: 'No route found' })
 })
