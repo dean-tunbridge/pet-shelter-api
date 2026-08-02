@@ -30,36 +30,37 @@ app.get(
   },
 )
 
+// PET PARAMS TYPE //
 type PetQueryParams = {
   species?: string
   adopted?: 'true' | 'false'
 }
 
-// GET BY SPECIES //
-// GET BY ADOPTED STATUS //
+// GET BY SPECIES & GET BY ADOPTED STATUS//
 app.get(
   '/',
   (
     req: Request<{}, unknown, {}, PetQueryParams>,
-    res: Response<Pet[] | { message: string }>,
+    res: Response<Pet[]>,
   ): void => {
     const { species, adopted } = req.query
-    let filterPets: Pet[] = pets
+
+    let filteredPets: Pet[] = pets
 
     if (species) {
-      filterPets = filterPets.filter(
+      filteredPets = filteredPets.filter(
         (pet: Pet): boolean =>
-          pet.species.toLowerCase() === pet.species.toLowerCase(),
+          pet.species.toLowerCase() === species.toLowerCase(),
       )
     }
 
     if (adopted) {
-      filterPets = filterPets.filter(
+      filteredPets = filteredPets.filter(
         (pet: Pet): boolean => pet.adopted === JSON.parse(adopted),
       )
     }
 
-    res.json(filterPets)
+    res.json(filteredPets)
   },
 )
 
@@ -68,6 +69,7 @@ app.use((req: Request, res: Response<{ message: string }>): void => {
   res.status(404).json({ message: 'No route found' })
 })
 
+// PORT //
 app.listen(PORT, (): void => {
   console.log(`Listening on port:${PORT}`)
 })
