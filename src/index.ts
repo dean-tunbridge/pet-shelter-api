@@ -16,7 +16,7 @@ const PORT = 8000
 
 //GET
 app.get('/', (req, res) => {
-  res.json({ pet })
+  res.json(pet)
 })
 
 app.listen(PORT, (): void => {
