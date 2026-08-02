@@ -36,6 +36,7 @@ type PetQueryParams = {
 }
 
 // GET BY SPECIES //
+// GET BY ADOPTED STATUS //
 app.get(
   '/',
   (

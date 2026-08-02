@@ -20,17 +20,16 @@ app.get('/:id', (req, res) => {
     pet ? res.json(pet) : res.status(404).json({ message: 'Invalid ID' });
 });
 // GET BY SPECIES //
+// GET BY ADOPTED STATUS //
 app.get('/', (req, res) => {
-    const { species, adopted } = req.query;
+    const { species } = req.query;
     let filterPets = pets_1.pets;
     if (species) {
         filterPets = filterPets.filter((pet) => pet.species.toLowerCase() === pet.species.toLowerCase());
     }
-    if (adopted) {
-        filterPets = filterPets.filter((pet) => pet.adopted === JSON.parse(adopted));
-    }
     res.json(filterPets);
 });
+// GET BY ADOPTED STATUS //
 // ERROR //
 app.use((req, res) => {
     res.status(404).json({ message: 'No route found' });
