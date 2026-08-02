@@ -1,8 +1,17 @@
 export type Pets = {
+  id: number
   name: string
   species: string
-  adopted: boolean
+  breed: string
   age: number
+  adopted: false
+  intakeDate: string
+  medicalRecord: {
+    vaccinations: string[]
+    weightKg: number
+    microchipId: null
+  }
+  photo: string
 }
 
 export const pets: Pets[] = [
