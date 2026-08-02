@@ -32,7 +32,7 @@ app.get(
 
 type PetQueryParams = {
   species?: string
-  adopted?: boolean
+  adopted?: string
 }
 
 // GET BY SPECIES //
@@ -58,19 +58,25 @@ app.get(
 )
 
 // GET BY ADOPTED STATUS //
-app.get('/', (req: Request, res: Response): void => {
-  const { adopted } = req.query
-  let isAdopted: Pet[] = pets
+app.get(
+  '/',
+  (
+    req: Request<{}, unknown, {}, PetQueryParams>,
+    res: Response<Pet[] | { message: string }>,
+  ): void => {
+    const { adopted } = req.query
+    let isAdopted: Pet[] = pets
 
-  if (adopted) {
-    isAdopted = isAdopted.filter(
-      (pet: Pet): boolean => pet.adopted === pet.adopted,
-    )
-    res.json(isAdopted)
-  } else {
-    res.status(404).json({ message: 'Invalid Response' })
-  }
-})
+    if (adopted) {
+      isAdopted = isAdopted.filter(
+        (pet: Pet): boolean => pet.adopted === pet.adopted,
+      )
+      res.json(isAdopted)
+    } else {
+      res.status(404).json({ message: 'Invalid Response' })
+    }
+  },
+)
 
 // ERROR //
 app.use((req: Request, res: Response<{ message: string }>): void => {
