@@ -9,14 +9,18 @@ type Pets = {
   age: number
 }
 
-const pet: Pets = { name: 'Pixel', species: 'cat', adopted: true, age: 9 }
+const pets: Pets[] = [
+  { name: 'Pixel', species: 'cat', adopted: true, age: 9 },
+  { name: 'Miso', species: 'cat', adopted: true, age: 6 },
+  { name: 'Leonard', species: 'dog', adopted: false, age: 7 },
+]
 
 const app: Express = express()
 const PORT = 8000
 
 //GET
 app.get('/', (req, res) => {
-  res.json(pet)
+  res.json(pets)
 })
 
 app.listen(PORT, (): void => {
