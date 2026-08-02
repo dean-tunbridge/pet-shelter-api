@@ -21,15 +21,15 @@ app.get('/:id', (req, res) => {
 });
 // GET BY SPECIES //
 app.get('/', (req, res) => {
-    const { species } = req.query;
+    const { species, adopted } = req.query;
     let filterPets = pets_1.pets;
     if (species) {
         filterPets = filterPets.filter((pet) => pet.species.toLowerCase() === pet.species.toLowerCase());
-        res.json(filterPets);
     }
-    else {
-        res.status(404).json({ message: 'Invalid ID' });
+    if (adopted) {
+        filterPets = filterPets.filter((pet) => pet.adopted === JSON.parse(adopted));
     }
+    res.json(filterPets);
 });
 // ERROR //
 app.use((req, res) => {
