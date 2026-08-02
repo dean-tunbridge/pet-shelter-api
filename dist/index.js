@@ -9,10 +9,17 @@ const pets_1 = require("./data/pets");
 const app = (0, express_1.default)();
 const PORT = 8000;
 app.use((0, cors_1.default)());
-//GET
+// GET //
 app.get('/', (req, res) => {
     res.json(pets_1.pets);
 });
+// GET BY ID //
+app.get('/:id', (req, res) => {
+    const { id } = req.params;
+    const pet = pets_1.pets.find((pet) => pet.id.toString() === id);
+    pet ? res.json(pet) : res.status(404).json({ message: 'Invalid ID' });
+});
+// ERROR //
 app.use((req, res) => {
     res.status(404).json({ message: 'No route found' });
 });

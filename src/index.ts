@@ -30,6 +30,28 @@ app.get(
   },
 )
 
+// GET BY SPECIES //
+app.get(
+  '/',
+  (
+    req: Request<{}, unknown, {}, { species?: string }>,
+    res: Response<Pet[] | { message: string }>,
+  ): void => {
+    const { species } = req.query
+    let filterPets: Pet[] = pets
+
+    if (species) {
+      filterPets = filterPets.filter(
+        (pet: Pet): boolean =>
+          pet.species.toLowerCase() === pet.species.toLowerCase(),
+      )
+      res.json(filterPets)
+    } else {
+      res.status(404).json({ message: 'Invalid ID' })
+    }
+  },
+)
+
 // ERROR //
 app.use((req: Request, res: Response<{ message: string }>): void => {
   res.status(404).json({ message: 'No route found' })
