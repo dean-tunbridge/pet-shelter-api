@@ -6,7 +6,7 @@ const app: Express = express()
 const PORT = 8000
 
 //GET
-app.get('/', (req: Request, res: Response) => {
+app.get('/', (req: Request, res: Response): void => {
   res.json(pets)
 })
 
