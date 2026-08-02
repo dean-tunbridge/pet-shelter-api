@@ -32,7 +32,7 @@ app.get(
 
 type PetQueryParams = {
   species?: string
-  adopted?: string
+  adopted?: 'true' | 'false'
 }
 
 // GET BY SPECIES //
