@@ -6,10 +6,11 @@ export type Pets = {
   age: number
   adopted: boolean
   intakeDate: Date
+  adoptionDate?: Date
   medicalRecord: {
     vaccinations: string[]
     weightKg: number
-    microchipId: string
+    microchipId: string | null
   }
   photo: string
 }
