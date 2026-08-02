@@ -4,12 +4,12 @@ export type Pets = {
   species: string
   breed: string
   age: number
-  adopted: false
-  intakeDate: string
+  adopted: boolean
+  intakeDate: Date
   medicalRecord: {
     vaccinations: string[]
     weightKg: number
-    microchipId: null
+    microchipId: string
   }
   photo: string
 }
