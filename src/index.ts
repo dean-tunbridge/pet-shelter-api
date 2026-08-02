@@ -30,11 +30,15 @@ app.get(
   },
 )
 
+type PetQueryParams = {
+  species?: string
+}
+
 // GET BY SPECIES //
 app.get(
   '/',
   (
-    req: Request<{}, unknown, {}, { species?: string }>,
+    req: Request<{}, unknown, {}, PetQueryParams>,
     res: Response<Pet[] | { message: string }>,
   ): void => {
     const { species } = req.query
