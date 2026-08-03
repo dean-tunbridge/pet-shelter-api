@@ -60,11 +60,15 @@ app.get(
     }
 
     if (minAge) {
-      filteredPets.filter((pet: Pet) => pet.age >= JSON.parse(minAge))
+      filteredPets = filteredPets.filter(
+        (pet: Pet): boolean => pet.age >= JSON.parse(minAge),
+      )
     }
 
     if (maxAge) {
-      filteredPets.filter((pet: Pet) => pet.age <= JSON.parse(maxAge))
+      filteredPets = filteredPets.filter(
+        (pet: Pet): boolean => pet.age <= JSON.parse(maxAge),
+      )
     }
 
     res.json(filteredPets)

@@ -15,15 +15,23 @@ app.get('/:id', (req, res) => {
     const pet = pets_1.pets.find((pet) => pet.id.toString() === id);
     pet ? res.json(pet) : res.status(404).json({ message: 'Invalid ID' });
 });
-// GET BY SPECIES & GET BY ADOPTED STATUS//
+// GET BY SPECIES //
+// GET BY ADOPTED STATUS //
+// GET PETS WITHIN SPECIFIED AGE RANGE //
 app.get('/', (req, res) => {
-    const { species, adopted } = req.query;
+    const { species, adopted, minAge, maxAge } = req.query;
     let filteredPets = pets_1.pets;
     if (species) {
         filteredPets = filteredPets.filter((pet) => pet.species.toLowerCase() === species.toLowerCase());
     }
     if (adopted) {
         filteredPets = filteredPets.filter((pet) => pet.adopted === JSON.parse(adopted));
+    }
+    if (minAge) {
+        filteredPets = filteredPets.filter((pet) => pet.age >= JSON.parse(minAge));
+    }
+    if (maxAge) {
+        filteredPets = filteredPets.filter((pet) => pet.age <= JSON.parse(maxAge));
     }
     res.json(filteredPets);
 });
