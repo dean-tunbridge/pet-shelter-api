@@ -29,7 +29,8 @@ app.get(
 type PetQueryParams = {
   species?: string
   adopted?: 'true' | 'false'
-  age?: number
+  minAge?: string
+  maxAge?: string
 }
 
 // GET BY SPECIES & GET BY ADOPTED STATUS//
@@ -67,9 +68,17 @@ app.get(
     req: Request<{}, unknown, {}, PetQueryParams>,
     res: Response<Pet[]>,
   ): void => {
-    const { age } = req.query
+    const { minAge, maxAge } = req.query
 
     let filteredPets: Pet[] = pets
+
+    if (minAge) {
+      filteredPets.filter((pet: Pet) => pet.age >= JSON.parse(minAge))
+    }
+
+    if (maxAge) {
+      filteredPets.filter((pet: Pet) => pet.age <= JSON.parse(maxAge))
+    }
   },
 )
 // ERROR //
