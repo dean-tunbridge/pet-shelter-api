@@ -33,14 +33,16 @@ type PetQueryParams = {
   maxAge?: string
 }
 
-// GET BY SPECIES & GET BY ADOPTED STATUS//
+// GET BY SPECIES //
+// GET BY ADOPTED STATUS //
+// GET PETS WITHIN SPECIFIED AGE RANGE //
 app.get(
   '/',
   (
     req: Request<{}, unknown, {}, PetQueryParams>,
     res: Response<Pet[]>,
   ): void => {
-    const { species, adopted } = req.query
+    const { species, adopted, minAge, maxAge } = req.query
 
     let filteredPets: Pet[] = pets
 
@@ -57,21 +59,6 @@ app.get(
       )
     }
 
-    res.json(filteredPets)
-  },
-)
-
-// GET PETS WITHIN SPECIFIED AGE RANGE //
-app.get(
-  '/',
-  (
-    req: Request<{}, unknown, {}, PetQueryParams>,
-    res: Response<Pet[]>,
-  ): void => {
-    const { minAge, maxAge } = req.query
-
-    let filteredPets: Pet[] = pets
-
     if (minAge) {
       filteredPets.filter((pet: Pet) => pet.age >= JSON.parse(minAge))
     }
@@ -79,8 +66,11 @@ app.get(
     if (maxAge) {
       filteredPets.filter((pet: Pet) => pet.age <= JSON.parse(maxAge))
     }
+
+    res.json(filteredPets)
   },
 )
+
 // ERROR //
 app.use((req: Request, res: Response<{ message: string }>): void => {
   res.status(404).json({ message: 'No route found' })
