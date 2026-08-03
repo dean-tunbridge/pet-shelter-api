@@ -33,9 +33,7 @@ type PetQueryParams = {
   maxAge?: string
 }
 
-// GET BY SPECIES //
-// GET BY ADOPTED STATUS //
-// GET PETS WITHIN SPECIFIED AGE RANGE //
+// GET VIA QUERY //
 app.get(
   '/',
   (
@@ -46,6 +44,7 @@ app.get(
 
     let filteredPets: Pet[] = pets
 
+    // GET BY SPECIES //
     if (species) {
       filteredPets = filteredPets.filter(
         (pet: Pet): boolean =>
@@ -53,12 +52,14 @@ app.get(
       )
     }
 
+    // GET BY ADOPTED STATUS //
     if (adopted) {
       filteredPets = filteredPets.filter(
         (pet: Pet): boolean => pet.adopted === JSON.parse(adopted),
       )
     }
 
+    // GET PETS WITHIN SPECIFIED AGE RANGE //
     if (minAge) {
       filteredPets = filteredPets.filter(
         (pet: Pet): boolean => pet.age >= JSON.parse(minAge),
