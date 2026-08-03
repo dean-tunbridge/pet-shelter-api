@@ -2,17 +2,9 @@ import express from 'express'
 import type { Router, Request, Response } from 'express'
 
 import { pets } from '../data/pets'
-import type { Pet } from '../data/pets'
+import type { Pet, PetQueryParams } from '../data/pets'
 
 const petRouter: Router = express.Router()
-
-// PET PARAMS TYPE //
-type PetQueryParams = {
-  species?: string
-  adopted?: 'true' | 'false'
-  minAge?: string
-  maxAge?: string
-}
 
 // GET BY ID //
 petRouter.get(

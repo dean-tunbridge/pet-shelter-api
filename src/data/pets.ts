@@ -1,3 +1,4 @@
+// PET TYPE //
 export type Pet = {
   id: number
   name: string
@@ -15,6 +16,15 @@ export type Pet = {
   photo: string
 }
 
+// PET PARAMS TYPE //
+export type PetQueryParams = {
+  species?: string
+  adopted?: 'true' | 'false'
+  minAge?: string
+  maxAge?: string
+}
+
+// PET DATA //
 export const pets: Pet[] = [
   {
     id: 1,
