@@ -4,7 +4,8 @@ import type { Router, Request, Response } from 'express'
 import { pets } from '../data/pets'
 import type { Pet, PetQueryParams } from '../data/pets'
 
-const petRouter: Router = express.Router()
+// PET ROUTER //
+export const petRouter: Router = express.Router()
 
 // GET BY ID //
 petRouter.get(

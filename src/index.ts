@@ -5,7 +5,11 @@ import cors from 'cors'
 const app: Express = express()
 const PORT = 8000
 
+import { petRouter } from './routes/pets.routes'
+
 app.use(cors())
+
+app.use('/pets', petRouter)
 
 // ERROR //
 app.use((req: Request, res: Response<{ message: string }>): void => {
