@@ -4,7 +4,8 @@ import type { Request, Response } from 'express'
 import { pets } from '../data/pets'
 import type { Pet, PetQueryParams } from '../data/pets'
 
-const getPets = (
+// GET PET VIA QUERY //
+export const getPets = (
   req: Request<{}, unknown, {}, PetQueryParams>,
   res: Response<Pet[]>,
 ): void => {
@@ -43,7 +44,8 @@ const getPets = (
   res.json(filteredPets)
 }
 
-const getPetbyId = (
+// GET PET BY ID //
+export const getPetById = (
   req: Request<{ id: string }>,
   res: Response<Pet | { message: string }>,
 ): void => {
