@@ -1,5 +1,9 @@
 import express from 'express'
 import type { Router } from 'express'
+import type { Request, Response } from 'express'
+
+import { pets } from '../data/pets'
+import type { Pet } from '../data/pets'
 
 const petRouter: Router = express.Router()
 

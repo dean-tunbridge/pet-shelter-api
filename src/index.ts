@@ -1,9 +1,6 @@
-import express, { request } from 'express'
+import express from 'express'
 import type { Express, Request, Response } from 'express'
 import cors from 'cors'
-
-import { pets } from './data/pets'
-import type { Pet } from './data/pets'
 
 const app: Express = express()
 const PORT = 8000
