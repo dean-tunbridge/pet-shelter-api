@@ -9,10 +9,6 @@ const pets_1 = require("./data/pets");
 const app = (0, express_1.default)();
 const PORT = 8000;
 app.use((0, cors_1.default)());
-// GET //
-app.get('/', (req, res) => {
-    res.json(pets_1.pets);
-});
 // GET BY ID //
 app.get('/:id', (req, res) => {
     const { id } = req.params;

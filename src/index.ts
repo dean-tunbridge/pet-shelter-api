@@ -10,11 +10,6 @@ const PORT = 8000
 
 app.use(cors())
 
-// GET //
-app.get('/', (req: Request, res: Response<Pet[]>): void => {
-  res.json(pets)
-})
-
 // GET BY ID //
 app.get(
   '/:id',
