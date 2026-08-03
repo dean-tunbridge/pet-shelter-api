@@ -2,7 +2,7 @@ import express from 'express'
 import type { Router, Request, Response } from 'express'
 
 import { pets } from '../data/pets'
-import type { Pet, PetQueryParams } from '../data/pets'
+import type { Pet } from '../data/pets'
 
 // PET ROUTER //
 export const petRouter: Router = express.Router()
@@ -23,44 +23,4 @@ petRouter.get(
 )
 
 // GET VIA QUERY //
-petRouter.get(
-  '/',
-  (
-    req: Request<{}, unknown, {}, PetQueryParams>,
-    res: Response<Pet[]>,
-  ): void => {
-    const { species, adopted, minAge, maxAge } = req.query
-
-    let filteredPets: Pet[] = pets
-
-    // GET BY SPECIES //
-    if (species) {
-      filteredPets = filteredPets.filter(
-        (pet: Pet): boolean =>
-          pet.species.toLowerCase() === species.toLowerCase(),
-      )
-    }
-
-    // GET BY ADOPTED STATUS //
-    if (adopted) {
-      filteredPets = filteredPets.filter(
-        (pet: Pet): boolean => pet.adopted === JSON.parse(adopted),
-      )
-    }
-
-    // GET PETS WITHIN SPECIFIED AGE RANGE //
-    if (minAge) {
-      filteredPets = filteredPets.filter(
-        (pet: Pet): boolean => pet.age >= JSON.parse(minAge),
-      )
-    }
-
-    if (maxAge) {
-      filteredPets = filteredPets.filter(
-        (pet: Pet): boolean => pet.age <= JSON.parse(maxAge),
-      )
-    }
-
-    res.json(filteredPets)
-  },
-)
+petRouter.get('/')
